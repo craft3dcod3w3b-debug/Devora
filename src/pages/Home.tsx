@@ -152,12 +152,12 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Social Proof / Counter */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.25rem', color: 'var(--color-fg-muted)' }}>
+          {/* Features Highlight / Counter */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.25rem', color: 'var(--color-fg-muted)', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <ShieldCheck size={20} style={{ color: 'var(--color-primary)' }} />
               <span style={{ fontSize: '0.9375rem', fontWeight: 500 }}>
-                Trusted by <strong style={{ color: 'var(--color-fg)' }}>10,000+</strong> developers
+                <strong style={{ color: 'var(--color-fg)' }}>100% Client-Side</strong> & Private
               </span>
             </div>
             <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'var(--color-border-strong)' }} />
