@@ -33,22 +33,22 @@ const validateCronPart = (value: string, min: number, max: number, name: string)
         return `Invalid cron expression: ${name} step format is invalid.`;
       }
       
-      const stepValue = parseInt(parts[1], 10);
-      if (!/^\d+$/.test(parts[1]) || isNaN(stepValue) || stepValue <= 0) {
+      const stepValue = parseInt(parts[1]!, 10);
+      if (!/^\d+$/.test(parts[1]!) || isNaN(stepValue) || stepValue <= 0) {
         return `Invalid cron expression: ${name} step value must be a positive integer greater than 0.`;
       }
       
       if (parts[0] !== '*') {
-        if (parts[0].includes('-')) {
-          const rangeParts = parts[0].split('-');
+        if (parts[0]!.includes('-')) {
+          const rangeParts = parts[0]!.split('-');
           if (rangeParts.length !== 2 || rangeParts[0] === '' || rangeParts[1] === '') {
             return `Invalid cron expression: ${name} range format is invalid.`;
           }
-          if (!/^\d+$/.test(rangeParts[0]) || !/^\d+$/.test(rangeParts[1])) {
+          if (!/^\d+$/.test(rangeParts[0]!) || !/^\d+$/.test(rangeParts[1]!)) {
              return `Invalid cron expression: ${name} range format is invalid.`;
           }
-          const start = parseInt(rangeParts[0], 10);
-          const end = parseInt(rangeParts[1], 10);
+          const start = parseInt(rangeParts[0]!, 10);
+          const end = parseInt(rangeParts[1]!, 10);
           if (isNaN(start) || isNaN(end) || start < min || end > max) {
             return `Invalid cron expression: ${name} must be between ${min} and ${max}.`;
           }
@@ -56,10 +56,10 @@ const validateCronPart = (value: string, min: number, max: number, name: string)
             return `Invalid cron expression: ${name} range start value must be less than or equal to end value.`;
           }
         } else {
-          if (!/^\d+$/.test(parts[0])) {
+          if (!/^\d+$/.test(parts[0]!)) {
             return `Invalid cron expression: ${name} contains invalid number format.`;
           }
-          const val = parseInt(parts[0], 10);
+          const val = parseInt(parts[0]!, 10);
           if (isNaN(val) || val < min || val > max) {
             return `Invalid cron expression: ${name} must be between ${min} and ${max}.`;
           }
@@ -71,12 +71,12 @@ const validateCronPart = (value: string, min: number, max: number, name: string)
         return `Invalid cron expression: ${name} range format is invalid.`;
       }
       
-      if (!/^\d+$/.test(parts[0]) || !/^\d+$/.test(parts[1])) {
+      if (!/^\d+$/.test(parts[0]!) || !/^\d+$/.test(parts[1]!)) {
          return `Invalid cron expression: ${name} range format is invalid.`;
       }
       
-      const start = parseInt(parts[0], 10);
-      const end = parseInt(parts[1], 10);
+      const start = parseInt(parts[0]!, 10);
+      const end = parseInt(parts[1]!, 10);
       if (isNaN(start) || isNaN(end) || start < min || end > max) {
         return `Invalid cron expression: ${name} must be between ${min} and ${max}.`;
       }
@@ -113,7 +113,7 @@ const describeCronField = (value: string, type: string, map?: string[]) => {
   }
   
   if (value.includes('-')) {
-    const [start, end] = value.split('-');
+    const [start, end] = value.split('-') as [string, string];
     if (type === 'day of the week' || type === 'month') return `${mapValue(start)} through ${mapValue(end)}`;
     return `from ${type} ${mapValue(start)} through ${mapValue(end)}`;
   }

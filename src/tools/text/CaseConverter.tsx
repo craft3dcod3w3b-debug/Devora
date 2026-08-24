@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { TwoPanelLayout } from '../../components/layout/ToolLayout';
 import CodeEditor from '../../components/ui/CodeEditor';
-import { Copy, Check } from 'lucide-react';
 
 type CaseType = 'uppercase' | 'lowercase' | 'title' | 'sentence' | 'camel' | 'snake' | 'kebab';
 

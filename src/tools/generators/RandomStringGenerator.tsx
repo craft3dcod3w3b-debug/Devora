@@ -1,12 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Copy, Check, Download, RefreshCw } from 'lucide-react';
 
-const CHARSETS: Record<string, string> = {
-  uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  lowercase: 'abcdefghijklmnopqrstuvwxyz',
-  numbers: '0123456789',
-  hex: '0123456789abcdef',
-};
 
 function generateString(length: number, charset: string): string {
   if (!charset) return '';

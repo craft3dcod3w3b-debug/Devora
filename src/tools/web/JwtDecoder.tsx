@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react';
-import { TwoPanelLayout } from '../../components/layout/ToolLayout';
 import CodeEditor from '../../components/ui/CodeEditor';
 import { AlertTriangle } from 'lucide-react';
 
@@ -30,7 +29,7 @@ export default function JwtDecoder() {
 
       let headerJson;
       try {
-        const headerRaw = decodeBase64Url(parts[0]);
+        const headerRaw = decodeBase64Url(parts[0]!);
         headerJson = JSON.stringify(JSON.parse(headerRaw), null, 2);
       } catch (e) {
         throw new Error('Invalid JWT — Unable to decode JWT header.');
@@ -38,7 +37,7 @@ export default function JwtDecoder() {
 
       let payloadJson;
       try {
-        const payloadRaw = decodeBase64Url(parts[1]);
+        const payloadRaw = decodeBase64Url(parts[1]!);
         payloadJson = JSON.stringify(JSON.parse(payloadRaw), null, 2);
       } catch (e) {
         throw new Error('Invalid JWT — Unable to decode JWT payload.');

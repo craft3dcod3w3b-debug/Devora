@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from 'react';
-import { TwoPanelLayout } from '../../components/layout/ToolLayout';
 import CodeEditor from '../../components/ui/CodeEditor';
 import { UAParser } from 'ua-parser-js';
 import { Monitor, Smartphone, Globe, Cpu, Hash } from 'lucide-react';

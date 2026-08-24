@@ -14,7 +14,7 @@ export default function SqlFormatter() {
 
 
 
-  const handleSqlError = (err: unknown) => {
+  const handleSqlError = () => {
     setOutput('');
     // Hide massive technical stack traces per user requirements
     setError('Unable to format SQL\n\nPlease check your query for syntax errors.');
@@ -56,8 +56,8 @@ export default function SqlFormatter() {
         .trim();
       setOutput(minified);
       setError(null);
-    } catch (err) {
-      handleSqlError(err);
+    } catch {
+      handleSqlError();
     }
   };
 

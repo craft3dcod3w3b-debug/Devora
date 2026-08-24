@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react';
-import { TwoPanelLayout } from '../../components/layout/ToolLayout';
 import CodeEditor from '../../components/ui/CodeEditor';
 import { LinkIcon, AlertCircle } from 'lucide-react';
 

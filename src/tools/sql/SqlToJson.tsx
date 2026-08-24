@@ -42,7 +42,6 @@ export default function SqlToJson() {
     let match;
 
     while ((match = regex.exec(sql)) !== null) {
-      const _table = match[1]!.replace(/`/g, '');
       const columns = match[2]!.split(',').map(c => c.trim().replace(/[`'"]/g, ''));
       
       // Parse values carefully avoiding commas inside strings
