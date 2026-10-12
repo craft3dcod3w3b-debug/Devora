@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Layout from './components/layout/Layout';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <SpeedInsights />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
