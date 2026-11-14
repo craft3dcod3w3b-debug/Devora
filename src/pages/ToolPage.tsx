@@ -1,6 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ChevronRight, Heart } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ChevronRight, Heart, ShieldCheck } from 'lucide-react';
 import { getToolBySlug, getToolsByCategory } from '../data/tools';
 import { getCategoryBySlug } from '../data/categories';
 import { LucideIcon } from '../components/ui/LucideIcon';
@@ -8,7 +9,7 @@ import ToolCard from '../components/ui/ToolCard';
 import { useFavorites } from '../hooks/useFavorites';
 import { useRecentTools } from '../hooks/useRecentTools';
 import { SEO } from '../components/seo/SEO';
-import { AdUnit } from '../components/ads/AdUnit';
+import { smoothEase, viewportScrollConfig } from '../utils/animations';
 
 export default function ToolPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -104,7 +105,10 @@ export default function ToolPage() {
       />
       
       {/* Breadcrumbs */}
-      <nav
+      <motion.nav
+        initial={{ opacity: 0, y: -6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
         aria-label="Breadcrumb"
         style={{
           display: 'flex',
@@ -112,20 +116,20 @@ export default function ToolPage() {
           gap: '0.375rem',
           fontSize: '0.8125rem',
           color: 'var(--color-fg-muted)',
-          marginBottom: '1.5rem',
+          marginBottom: '1.75rem',
           flexWrap: 'wrap',
         }}
       >
         <Link to="/" style={{ color: 'var(--color-fg-muted)', textDecoration: 'none' }}>
           Home
         </Link>
-        <ChevronRight size={14} />
+        <ChevronRight size={13} />
         <Link to="/tools" style={{ color: 'var(--color-fg-muted)', textDecoration: 'none' }}>
           Tools
         </Link>
         {category && (
           <>
-            <ChevronRight size={14} />
+            <ChevronRight size={13} />
             <Link
               to={`/categories/${category.slug}`}
               style={{ color: 'var(--color-fg-muted)', textDecoration: 'none' }}
@@ -134,18 +138,21 @@ export default function ToolPage() {
             </Link>
           </>
         )}
-        <ChevronRight size={14} />
-        <span style={{ color: 'var(--color-fg)' }}>{tool.name}</span>
-      </nav>
+        <ChevronRight size={13} />
+        <span style={{ color: 'var(--color-fg)', fontWeight: 500 }}>{tool.name}</span>
+      </motion.nav>
 
       {/* Tool header */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: smoothEase }}
         style={{
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          gap: '1rem',
-          marginBottom: '2rem',
+          gap: '1.25rem',
+          marginBottom: '1.75rem',
           flexWrap: 'wrap',
         }}
       >
@@ -155,86 +162,121 @@ export default function ToolPage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '3rem',
-              height: '3rem',
+              width: '3.25rem',
+              height: '3.25rem',
               borderRadius: 'var(--radius-lg)',
               backgroundColor: category?.color ? `${category.color}15` : 'var(--color-primary-light)',
               color: category?.color || 'var(--color-primary)',
+              border: `1px solid ${category?.color ? `${category.color}30` : 'rgba(99, 102, 241, 0.25)'}`,
+              boxShadow: category?.color ? `0 4px 16px ${category.color}15` : 'none',
+              flexShrink: 0,
             }}
           >
             <LucideIcon name={tool.icon} size={24} />
           </span>
           <div>
-            <h1 style={{ fontSize: '1.75rem', marginBottom: '0.25rem' }}>{tool.name}</h1>
-            <p style={{ fontSize: '0.9375rem', color: 'var(--color-fg-muted)', margin: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', flexWrap: 'wrap' }}>
+              <h1 style={{ fontSize: '1.85rem', fontWeight: 800, letterSpacing: '-0.03em', margin: 0 }}>{tool.name}</h1>
+              {category && (
+                <span
+                  className="badge"
+                  style={{
+                    backgroundColor: `${category.color}15`,
+                    color: category.color,
+                    fontSize: '0.6875rem',
+                    border: `1px solid ${category.color}25`,
+                    fontWeight: 600,
+                  }}
+                >
+                  {category.name.replace(' Tools', '')}
+                </span>
+              )}
+            </div>
+            <p style={{ fontSize: '0.9375rem', color: 'var(--color-fg-muted)', margin: '0.35rem 0 0' }}>
               {tool.description}
             </p>
           </div>
         </div>
-        <button
-          onClick={() => toggleFavorite(tool.id)}
-          className="btn btn-secondary btn-sm"
-          style={{
-            color: isFavorite(tool.id) ? '#ef4444' : undefined,
-          }}
-        >
-          <Heart size={16} fill={isFavorite(tool.id) ? '#ef4444' : 'none'} />
-          {isFavorite(tool.id) ? 'Favorited' : 'Favorite'}
-        </button>
-      </div>
 
-      {/* Privacy badge */}
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.375rem',
-          fontSize: '0.75rem',
-          color: 'var(--color-success)',
-          backgroundColor: 'var(--color-success-light)',
-          padding: '0.25rem 0.75rem',
-          borderRadius: 'var(--radius-full)',
-          marginBottom: '1.5rem',
-        }}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {/* Privacy badge */}
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.375rem',
+              fontSize: '0.75rem',
+              fontWeight: 500,
+              color: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+              border: '1px solid rgba(16, 185, 129, 0.25)',
+              padding: '0.35rem 0.75rem',
+              borderRadius: 'var(--radius-full)',
+            }}
+          >
+            <ShieldCheck size={14} style={{ color: '#10b981' }} />
+            <span>Local & Private</span>
+          </div>
+
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => toggleFavorite(tool.id)}
+            className="btn btn-secondary btn-sm"
+            style={{
+              color: isFavorite(tool.id) ? '#ef4444' : undefined,
+              borderColor: isFavorite(tool.id) ? 'rgba(239, 68, 68, 0.3)' : undefined,
+            }}
+          >
+            <Heart size={15} fill={isFavorite(tool.id) ? '#ef4444' : 'none'} />
+            {isFavorite(tool.id) ? 'Favorited' : 'Favorite'}
+          </motion.button>
+        </div>
+      </motion.div>
+
+      {/* Tool workbench component */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.1, ease: smoothEase }}
+        style={{ marginBottom: '2.5rem' }}
       >
-        🔒 Processed locally in your browser
-      </div>
-
-      {/* Tool component */}
-      <div style={{ marginBottom: '2rem' }}>
         <Suspense
           fallback={
             <div
+              className="card"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: '200px',
+                minHeight: '260px',
                 color: 'var(--color-fg-muted)',
               }}
             >
-              Loading tool...
+              Loading utility workbench...
             </div>
           }
         >
           <ToolComponent />
         </Suspense>
-      </div>
-
-      {/* Ad Placement */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
-        <AdUnit type="rectangle" />
-      </div>
+      </motion.div>
 
       {/* Related tools */}
       {relatedTools.length > 0 && (
-        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '2rem' }}>
-          <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Related Tools</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportScrollConfig}
+          transition={{ duration: 0.45, ease: smoothEase }}
+          style={{ borderTop: '1px solid var(--color-border)', paddingTop: '2.5rem' }}
+        >
+          <h2 style={{ fontSize: '1.35rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '1.25rem' }}>
+            Related Utilities
+          </h2>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '1rem',
+              gap: '1.25rem',
             }}
           >
             {relatedTools.map((t) => (
@@ -246,7 +288,7 @@ export default function ToolPage() {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );

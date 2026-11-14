@@ -20,8 +20,8 @@ export default function Contact() {
           <p style={{ color: 'var(--color-fg-secondary)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
             For general inquiries, bug reports, or partnership opportunities.
           </p>
-          <a href="mailto:support@devora.tools" className="btn btn-primary" style={{ width: '100%' }}>
-            support@devora.tools
+          <a href="mailto:craft3dcod3w3b@gmail.com" className="btn btn-primary" style={{ width: '100%' }}>
+            craft3dcod3w3b@gmail.com
           </a>
         </div>
 
@@ -35,7 +35,7 @@ export default function Contact() {
           <p style={{ color: 'var(--color-fg-secondary)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
             Have an idea for a new tool? Let us know what you'd like to see next.
           </p>
-          <a href="mailto:ideas@devora.tools" className="btn btn-secondary" style={{ width: '100%' }}>
+          <a href="mailto:craft3dcod3w3b@gmail.com?subject=Feature%20Request%20-%20Devora" className="btn btn-secondary" style={{ width: '100%' }}>
             Submit an Idea
           </a>
         </div>

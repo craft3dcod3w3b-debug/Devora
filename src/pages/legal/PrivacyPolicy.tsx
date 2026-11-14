@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
 
         <h2 style={{ fontSize: '1.5rem', color: 'var(--color-fg)', marginTop: '1rem', marginBottom: '0.5rem' }}>5. Contact Us</h2>
         <p>
-          If you have any questions about this Privacy Policy, please contact us at privacy@devora.tools.
+          If you have any questions about this Privacy Policy, please contact us at <a href="mailto:craft3dcod3w3b@gmail.com" style={{ color: 'var(--color-primary)' }}>craft3dcod3w3b@gmail.com</a>.
         </p>
       </div>
     </div>

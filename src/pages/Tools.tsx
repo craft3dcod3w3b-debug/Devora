@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import { tools as allTools, getToolsByCategory } from '../data/tools';
 import { categories } from '../data/categories';
@@ -6,6 +7,7 @@ import ToolCard from '../components/ui/ToolCard';
 import Select from '../components/ui/Select';
 import { useFavorites } from '../hooks/useFavorites';
 import { SEO } from '../components/seo/SEO';
+import { fadeInUp, staggerContainer, smoothEase } from '../utils/animations';
 
 export default function Tools() {
   const [search, setSearch] = useState('');
@@ -33,29 +35,55 @@ export default function Tools() {
         description="Browse our complete collection of fast, free developer utilities."
         canonicalUrl="https://devora.dev/tools"
       />
-      <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>All Tools</h1>
-        <p style={{ fontSize: '0.9375rem', color: 'var(--color-fg-muted)', margin: 0 }}>
-          Browse all {allTools.length} developer tools available on Devora.
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: smoothEase }}
+        style={{ marginBottom: '2.5rem' }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+          <h1 style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.03em', margin: 0 }}>
+            All Tools
+          </h1>
+          <span
+            style={{
+              fontSize: '0.8125rem',
+              fontWeight: 600,
+              fontFamily: 'var(--font-mono)',
+              color: 'var(--color-primary)',
+              backgroundColor: 'var(--color-primary-light)',
+              padding: '0.2rem 0.65rem',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid rgba(99, 102, 241, 0.25)',
+            }}
+          >
+            {filteredTools.length} {filteredTools.length === 1 ? 'utility' : 'utilities'}
+          </span>
+        </div>
+        <p style={{ fontSize: '0.975rem', color: 'var(--color-fg-muted)', margin: 0 }}>
+          Explore our complete collection of fast, private developer utilities running directly in your browser.
         </p>
-      </div>
+      </motion.div>
 
       {/* Filters */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.08, ease: smoothEase }}
         style={{
           display: 'flex',
-          gap: '0.75rem',
-          marginBottom: '2rem',
+          gap: '0.875rem',
+          marginBottom: '2.25rem',
           flexWrap: 'wrap',
           alignItems: 'center',
         }}
       >
-        <div style={{ position: 'relative', flex: '1 1 280px', maxWidth: '400px' }}>
+        <div style={{ position: 'relative', flex: '1 1 280px', maxWidth: '420px' }}>
           <Search
             size={16}
             style={{
               position: 'absolute',
-              left: '0.75rem',
+              left: '0.875rem',
               top: '50%',
               transform: 'translateY(-50%)',
               color: 'var(--color-fg-faint)',
@@ -66,9 +94,9 @@ export default function Tools() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Filter tools..."
+            placeholder="Search tools by name, tag, or function..."
             className="input"
-            style={{ paddingLeft: '2.25rem' }}
+            style={{ paddingLeft: '2.5rem' }}
           />
         </div>
         <Select
@@ -78,39 +106,58 @@ export default function Tools() {
           ]}
           value={selectedCategory}
           onChange={setSelectedCategory}
-          style={{ flex: '0 1 200px' }}
+          style={{ flex: '0 1 220px' }}
         />
-      </div>
+      </motion.div>
 
       {/* Results */}
       {filteredTools.length > 0 ? (
-        <div
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '1rem',
+            gap: '1.25rem',
           }}
         >
           {filteredTools.map((tool) => (
-            <ToolCard
-              key={tool.id}
-              tool={tool}
-              isFavorite={isFavorite(tool.id)}
-              onToggleFavorite={toggleFavorite}
-            />
+            <motion.div key={tool.id} variants={fadeInUp}>
+              <ToolCard
+                tool={tool}
+                isFavorite={isFavorite(tool.id)}
+                onToggleFavorite={toggleFavorite}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
-        <div
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="card"
           style={{
+            padding: '4rem 2rem',
             textAlign: 'center',
-            padding: '4rem 1rem',
-            color: 'var(--color-fg-muted)',
           }}
         >
-          <p style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>No tools found</p>
-          <p style={{ fontSize: '0.875rem' }}>Try adjusting your search or filter.</p>
-        </div>
+          <p style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--color-fg)', marginBottom: '0.5rem' }}>
+            No tools found matching "{search}"
+          </p>
+          <p style={{ fontSize: '0.875rem', color: 'var(--color-fg-muted)', marginBottom: '1.5rem' }}>
+            Try searching with broader terms or clear your active category filter.
+          </p>
+          <button
+            onClick={() => {
+              setSearch('');
+              setSelectedCategory('all');
+            }}
+            className="btn btn-secondary"
+          >
+            Reset Filters
+          </button>
+        </motion.div>
       )}
     </div>
   );

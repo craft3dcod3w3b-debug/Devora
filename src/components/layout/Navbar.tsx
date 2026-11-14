@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Wrench, LayoutGrid, TrendingUp, Info } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { Menu, X, Wrench, LayoutGrid, TrendingUp, Info, Heart } from 'lucide-react';
 import SearchBar from '../ui/SearchBar';
 import ThemeToggle from '../ui/ThemeToggle';
 
@@ -16,14 +17,22 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  // Scroll progress for hairline indicator
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 400,
+    damping: 35,
+    restDelta: 0.001,
+  });
+
   // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  // Track scroll for shadow
+  // Track scroll for header elevation
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 8);
+    const handler = () => setScrolled(window.scrollY > 12);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
@@ -36,11 +45,11 @@ export default function Navbar() {
           top: 0,
           zIndex: 'var(--z-sticky)',
           backgroundColor: 'var(--color-navbar-bg)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          borderBottom: `1px solid ${scrolled ? 'var(--color-navbar-border)' : 'transparent'}`,
-          boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
-          transition: 'border-color var(--transition-base), box-shadow var(--transition-base)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: '1px solid var(--color-navbar-border)',
+          boxShadow: scrolled ? '0 4px 20px -2px rgba(0, 0, 0, 0.15)' : 'none',
+          transition: 'all 250ms ease',
         }}
       >
         <nav
@@ -49,7 +58,7 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: '4rem',
+            height: '4.5rem',
             gap: '1rem',
           }}
         >
@@ -69,7 +78,12 @@ export default function Navbar() {
             <img
               src="/devora-logo.png"
               alt="Devora logo"
-              className="logo-nav"
+              className="logo-nav logo-dark-only"
+            />
+            <img
+              src="/devora-logo-light.png"
+              alt="Devora logo"
+              className="logo-nav logo-light-only"
             />
           </Link>
 
@@ -78,7 +92,11 @@ export default function Navbar() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.25rem',
+              gap: '0.375rem',
+              padding: '0.25rem 0.375rem',
+              borderRadius: 'var(--radius-full)',
+              background: 'var(--color-bg-secondary)',
+              border: '1px solid var(--color-border)',
             }}
             className="desktop-nav"
           >
@@ -90,13 +108,13 @@ export default function Navbar() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.375rem',
-                  padding: '0.5rem 0.875rem',
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
+                  padding: '0.45rem 0.95rem',
+                  fontSize: '0.845rem',
+                  fontWeight: 600,
                   color: isActive ? 'var(--color-primary)' : 'var(--color-navbar-fg-secondary)',
                   textDecoration: 'none',
-                  borderRadius: 'var(--radius-md)',
-                  transition: 'all var(--transition-fast)',
+                  borderRadius: 'var(--radius-full)',
+                  transition: 'all 200ms ease',
                   backgroundColor: isActive ? 'var(--color-primary-light)' : 'transparent',
                 })}
               >
@@ -105,12 +123,12 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right — Search + Theme Toggle + Mobile Menu */}
+          {/* Right — Favorites + Theme Toggle + Mobile Menu Button */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.5rem',
+              gap: '0.625rem',
               flexShrink: 0,
             }}
           >
@@ -125,22 +143,27 @@ export default function Navbar() {
                 height: '2.25rem',
                 borderRadius: 'var(--radius-md)',
                 color: 'var(--color-navbar-fg-secondary)',
+                border: '1px solid var(--color-border)',
+                backgroundColor: 'var(--color-bg-secondary)',
                 textDecoration: 'none',
-                transition: 'background-color var(--transition-fast), color var(--transition-fast)',
+                transition: 'all 200ms ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                e.currentTarget.style.color = 'var(--color-navbar-fg)';
+                e.currentTarget.style.backgroundColor = 'var(--color-bg-tertiary)';
+                e.currentTarget.style.color = '#ef4444';
+                e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)';
                 e.currentTarget.style.color = 'var(--color-navbar-fg-secondary)';
+                e.currentTarget.style.borderColor = 'var(--color-border)';
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <Heart size={17} />
             </Link>
 
             <ThemeToggle />
+
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="mobile-menu-btn"
@@ -149,85 +172,119 @@ export default function Navbar() {
                 display: 'none',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: '0.5rem',
-                background: 'none',
-                border: 'none',
+                width: '2.25rem',
+                height: '2.25rem',
+                borderRadius: 'var(--radius-md)',
+                background: 'var(--color-bg-secondary)',
+                border: '1px solid var(--color-border)',
                 cursor: 'pointer',
                 color: 'var(--color-navbar-fg-secondary)',
+                transition: 'all 200ms ease',
               }}
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </nav>
+
+        {/* Hairline Scroll Progress Bar */}
+        <motion.div
+          style={{
+            scaleX,
+            transformOrigin: '0%',
+            height: '2px',
+            background: 'linear-gradient(90deg, #6366f1, #a855f7, #06b6d4)',
+            width: '100%',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            opacity: scrolled ? 1 : 0,
+            transition: 'opacity 300ms ease',
+          }}
+        />
       </header>
 
-      {/* Mobile menu overlay */}
-      {mobileOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            top: '4rem',
-            zIndex: 'var(--z-overlay)',
-            backgroundColor: 'var(--color-bg)',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '1rem',
-            gap: '0.25rem',
-            overflowY: 'auto',
-          }}
-        >
-          {/* Mobile Search */}
-          <div style={{ marginBottom: '1rem' }}>
-            <SearchBar variant="hero" placeholder="Search tools..." />
-          </div>
-
-          {navLinks.map((link) => {
-            const Icon = link.icon;
-            return (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                style={({ isActive }) => ({
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  padding: '0.875rem 1rem',
-                  fontSize: '1rem',
-                  fontWeight: 500,
-                  color: isActive ? 'var(--color-primary)' : 'var(--color-fg)',
-                  textDecoration: 'none',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: isActive ? 'var(--color-primary-light)' : 'transparent',
-                  transition: 'background var(--transition-fast)',
-                })}
-              >
-                <Icon size={20} />
-                {link.label}
-              </NavLink>
-            );
-          })}
-
-          <NavLink
-            to="/favorites"
-            style={({ isActive }) => ({
+      {/* Animated Mobile menu drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              top: '4.25rem',
+              zIndex: 'var(--z-overlay)',
+              backgroundColor: 'var(--color-navbar-bg)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
               display: 'flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              padding: '0.875rem 1rem',
-              fontSize: '1rem',
-              fontWeight: 500,
-              color: isActive ? 'var(--color-primary)' : 'var(--color-fg)',
-              textDecoration: 'none',
-              borderRadius: 'var(--radius-md)',
-              backgroundColor: isActive ? 'var(--color-primary-light)' : 'transparent',
-            })}
+              flexDirection: 'column',
+              padding: '1.25rem',
+              gap: '0.5rem',
+              overflowY: 'auto',
+              borderBottom: '1px solid var(--color-navbar-border)',
+            }}
           >
-            ❤️ Favorites
-          </NavLink>
-        </div>
-      )}
+            {/* Mobile Search */}
+            <div style={{ marginBottom: '1rem' }}>
+              <SearchBar variant="hero" placeholder="Search developer tools..." />
+            </div>
+
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  style={({ isActive }) => ({
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.875rem 1rem',
+                    fontSize: '0.9375rem',
+                    fontWeight: 600,
+                    color: isActive ? 'var(--color-primary)' : 'var(--color-fg)',
+                    textDecoration: 'none',
+                    borderRadius: 'var(--radius-md)',
+                    backgroundColor: isActive ? 'var(--color-primary-light)' : 'var(--color-bg-secondary)',
+                    border: '1px solid',
+                    borderColor: isActive ? 'rgba(99, 102, 241, 0.3)' : 'var(--color-border)',
+                    transition: 'all 150ms ease',
+                  })}
+                >
+                  <Icon size={18} style={{ color: 'var(--color-primary)' }} />
+                  {link.label}
+                </NavLink>
+              );
+            })}
+
+            <NavLink
+              to="/favorites"
+              style={({ isActive }) => ({
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                padding: '0.875rem 1rem',
+                fontSize: '0.9375rem',
+                fontWeight: 600,
+                color: isActive ? 'var(--color-primary)' : 'var(--color-fg)',
+                textDecoration: 'none',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: isActive ? 'var(--color-primary-light)' : 'var(--color-bg-secondary)',
+                border: '1px solid',
+                borderColor: isActive ? 'rgba(99, 102, 241, 0.3)' : 'var(--color-border)',
+                transition: 'all 150ms ease',
+              })}
+            >
+              <Heart size={18} style={{ color: '#ef4444' }} />
+              Favorites
+            </NavLink>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Responsive styles */}
       <style>{`

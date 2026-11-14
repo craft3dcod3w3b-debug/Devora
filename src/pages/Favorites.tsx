@@ -1,9 +1,11 @@
+import { motion } from 'framer-motion';
 import { useFavorites } from '../hooks/useFavorites';
 import { tools as allTools } from '../data/tools';
 import ToolCard from '../components/ui/ToolCard';
 import { Link } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Heart, ArrowRight } from 'lucide-react';
 import { SEO } from '../components/seo/SEO';
+import { fadeInUp, staggerContainer, smoothEase } from '../utils/animations';
 
 export default function Favorites() {
   const { favorites, isFavorite, toggleFavorite, clearFavorites } = useFavorites();
@@ -19,58 +21,81 @@ export default function Favorites() {
         description="Access your saved developer tools."
         canonicalUrl="https://devora.dev/favorites"
       />
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: smoothEase }}
+        style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}
+      >
         <div>
-          <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Your Favorites</h1>
-          <p style={{ fontSize: '0.9375rem', color: 'var(--color-fg-muted)', margin: 0 }}>
-            Tools you've saved for quick access. Stored locally in your browser.
+          <h1 style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '0.5rem' }}>
+            Your Favorites
+          </h1>
+          <p style={{ fontSize: '0.975rem', color: 'var(--color-fg-muted)', margin: 0 }}>
+            Tools you've pinned for quick access. Stored locally in your browser cache.
           </p>
         </div>
         {favoriteTools.length > 0 && (
           <button onClick={clearFavorites} className="btn btn-ghost btn-sm" style={{ color: 'var(--color-error)' }}>
-            Clear all
+            Clear all favorites
           </button>
         )}
-      </div>
+      </motion.div>
 
       {favoriteTools.length > 0 ? (
-        <div
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '1rem',
+            gap: '1.25rem',
           }}
         >
           {favoriteTools.map((tool) => (
-            <ToolCard
-              key={tool.id}
-              tool={tool}
-              isFavorite={isFavorite(tool.id)}
-              onToggleFavorite={toggleFavorite}
-            />
+            <motion.div key={tool.id} variants={fadeInUp}>
+              <ToolCard
+                tool={tool}
+                isFavorite={isFavorite(tool.id)}
+                onToggleFavorite={toggleFavorite}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
-        <div
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="card"
           style={{
             textAlign: 'center',
-            padding: '4rem 1rem',
-            backgroundColor: 'var(--color-bg-secondary)',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px dashed var(--color-border-strong)',
+            padding: '5rem 1.5rem',
           }}
         >
-          <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '4rem', height: '4rem', borderRadius: '50%', backgroundColor: 'var(--color-bg)', marginBottom: '1.5rem', color: 'var(--color-fg-faint)', boxShadow: 'var(--shadow-sm)' }}>
-            <Heart size={32} />
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '3.5rem',
+              height: '3.5rem',
+              borderRadius: 'var(--radius-full)',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              color: '#ef4444',
+              marginBottom: '1.25rem',
+            }}
+          >
+            <Heart size={26} />
           </div>
-          <h2 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>No favorites yet</h2>
-          <p style={{ fontSize: '0.9375rem', color: 'var(--color-fg-muted)', marginBottom: '1.5rem', maxWidth: '400px', marginInline: 'auto' }}>
-            Click the heart icon on any tool to save it here for quick access later.
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>No favorites saved yet</h2>
+          <p style={{ fontSize: '0.9rem', color: 'var(--color-fg-muted)', maxWidth: '420px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
+            Click the heart icon on any tool card to pin your favorite utilities here for instant access anytime.
           </p>
           <Link to="/tools" className="btn btn-primary">
-            Browse Tools
+            Explore Tools <ArrowRight size={16} />
           </Link>
-        </div>
+        </motion.div>
       )}
     </div>
   );

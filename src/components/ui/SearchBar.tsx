@@ -209,12 +209,14 @@ export default function SearchBar({
             right: 0,
             marginTop: '0.5rem',
             backgroundColor: 'var(--color-card)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
             border: '1px solid var(--color-border)',
             borderRadius: 'var(--radius-lg)',
-            boxShadow: 'var(--shadow-lg)',
-            zIndex: 'var(--z-dropdown)',
+            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--color-border)',
+            zIndex: 9999,
             overflow: 'hidden',
-            maxHeight: '400px',
+            maxHeight: '380px',
             overflowY: 'auto',
           }}
         >

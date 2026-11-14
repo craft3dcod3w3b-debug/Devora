@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Sun, Moon, Monitor } from 'lucide-react';
 import { useThemeContext } from '../../context/ThemeContext';
 import type { ThemeMode } from '../../types/tool';
@@ -6,9 +7,9 @@ export default function ThemeToggle() {
   const { theme, cycleTheme } = useThemeContext();
 
   const iconMap: Record<ThemeMode, React.ReactNode> = {
-    light: <Sun size={18} />,
-    dark: <Moon size={18} />,
-    system: <Monitor size={18} />,
+    light: <Sun size={17} />,
+    dark: <Moon size={17} />,
+    system: <Monitor size={17} />,
   };
 
   const labelMap: Record<ThemeMode, string> = {
@@ -18,7 +19,8 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.92 }}
       onClick={cycleTheme}
       aria-label={`Current: ${labelMap[theme]}. Click to cycle theme.`}
       title={labelMap[theme]}
@@ -32,20 +34,22 @@ export default function ThemeToggle() {
         borderRadius: 'var(--radius-md)',
         cursor: 'pointer',
         color: 'var(--color-navbar-fg-secondary)',
-        background: 'transparent',
-        border: 'none',
-        transition: 'background-color var(--transition-fast), color var(--transition-fast)',
+        backgroundColor: 'var(--color-bg-secondary)',
+        border: '1px solid var(--color-border)',
+        transition: 'all 200ms ease',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-        e.currentTarget.style.color = 'var(--color-navbar-fg)';
+        e.currentTarget.style.backgroundColor = 'var(--color-bg-tertiary)';
+        e.currentTarget.style.color = 'var(--color-fg)';
+        e.currentTarget.style.borderColor = 'var(--color-border-strong)';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = 'transparent';
+        e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)';
         e.currentTarget.style.color = 'var(--color-navbar-fg-secondary)';
+        e.currentTarget.style.borderColor = 'var(--color-border)';
       }}
     >
       {iconMap[theme]}
-    </button>
+    </motion.button>
   );
 }
