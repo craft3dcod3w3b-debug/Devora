@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Zap, ShieldCheck, Sparkles, Globe, ChevronDown } from 'lucide-react';
 import SearchBar from '../components/ui/SearchBar';
 import ToolCard from '../components/ui/ToolCard';
@@ -11,7 +11,15 @@ import { useFavorites } from '../hooks/useFavorites';
 import { useRecentTools } from '../hooks/useRecentTools';
 import { tools as allTools } from '../data/tools';
 import { SEO } from '../components/seo/SEO';
-import { fadeInUp, staggerContainer, viewportScrollConfig, smoothEase } from '../utils/animations';
+import {
+  fadeInUp,
+  staggerContainer,
+  viewportScrollConfig,
+  smoothEase,
+  cardItemVariants,
+  gridStaggerContainer,
+  featureCardVariants,
+} from '../utils/animations';
 
 const valueProps = [
   {
@@ -54,6 +62,18 @@ export default function Home() {
   const { recentTools, clearRecentTools } = useRecentTools();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollY, scrollYProgress } = useScroll();
+
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const heroParallaxY = useTransform(scrollY, [0, 600], [0, 80]);
+  const scrollIndicatorOpacity = useTransform(scrollY, [0, 70], [1, 0]);
+
   const recentToolObjects = recentTools
     .map((entry) => allTools.find((t) => t.id === entry.toolId))
     .filter(Boolean) as typeof allTools;
@@ -84,6 +104,24 @@ export default function Home() {
         type="website"
       />
 
+      {/* ───── TOP SCROLL PROGRESS BAR ───── */}
+      {!prefersReducedMotion && (
+        <motion.div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '2.5px',
+            background: 'linear-gradient(90deg, var(--color-primary), #ec4899)',
+            transformOrigin: '0%',
+            scaleX,
+            zIndex: 9999,
+            pointerEvents: 'none',
+          }}
+        />
+      )}
+
       {/* ───── HERO SECTION ───── */}
       <section
         style={{
@@ -112,13 +150,14 @@ export default function Home() {
               opacity: 0.6,
             }}
           />
-          {/* Ambient radial glow */}
-          <div
+          {/* Ambient radial glow with parallax */}
+          <motion.div
             style={{
               position: 'absolute',
               top: '10%',
               left: '50%',
-              transform: 'translateX(-50%)',
+              x: '-50%',
+              y: prefersReducedMotion ? 0 : heroParallaxY,
               width: '900px',
               height: '520px',
               background:
@@ -381,7 +420,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Scroll Down Prompt Cue */}
+        {/* Scroll Down Prompt Cue (smooth fade on scroll) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -392,6 +431,7 @@ export default function Home() {
             textAlign: 'center',
             position: 'relative',
             zIndex: 1,
+            opacity: prefersReducedMotion ? 1 : scrollIndicatorOpacity,
           }}
         >
           <a
@@ -512,10 +552,13 @@ export default function Home() {
             ))}
           </motion.div>
 
-          {/* Tools Grid — 12 Tools */}
+          {/* Tools Grid — 12 Tools with Staggered Cascade */}
           <motion.div
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
+            key={selectedCategory}
+            initial={prefersReducedMotion ? 'visible' : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            variants={gridStaggerContainer}
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -523,12 +566,13 @@ export default function Home() {
             }}
           >
             {filteredTools.map((tool) => (
-              <ToolCard
-                key={tool.id}
-                tool={tool}
-                isFavorite={isFavorite(tool.id)}
-                onToggleFavorite={toggleFavorite}
-              />
+              <motion.div key={tool.id} variants={cardItemVariants}>
+                <ToolCard
+                  tool={tool}
+                  isFavorite={isFavorite(tool.id)}
+                  onToggleFavorite={toggleFavorite}
+                />
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -558,9 +602,10 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            initial="visible"
-            animate="visible"
-            variants={staggerContainer}
+            initial={prefersReducedMotion ? 'visible' : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.08 }}
+            variants={gridStaggerContainer}
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -568,7 +613,7 @@ export default function Home() {
             }}
           >
             {categories.map((cat) => (
-              <motion.div key={cat.id} variants={fadeInUp}>
+              <motion.div key={cat.id} variants={cardItemVariants}>
                 <CategoryCard category={cat} />
               </motion.div>
             ))}
@@ -602,7 +647,11 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div
+          <motion.div
+            initial={prefersReducedMotion ? 'visible' : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.08 }}
+            variants={gridStaggerContainer}
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -610,14 +659,15 @@ export default function Home() {
             }}
           >
             {featuredTools.map((tool) => (
-              <ToolCard
-                key={tool.id}
-                tool={tool}
-                isFavorite={isFavorite(tool.id)}
-                onToggleFavorite={toggleFavorite}
-              />
+              <motion.div key={tool.id} variants={cardItemVariants}>
+                <ToolCard
+                  tool={tool}
+                  isFavorite={isFavorite(tool.id)}
+                  onToggleFavorite={toggleFavorite}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -654,7 +704,11 @@ export default function Home() {
               </button>
             </motion.div>
 
-            <div
+            <motion.div
+              initial={prefersReducedMotion ? 'visible' : 'hidden'}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.08 }}
+              variants={gridStaggerContainer}
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -662,14 +716,15 @@ export default function Home() {
               }}
             >
               {recentToolObjects.slice(0, 6).map((tool) => (
-                <ToolCard
-                  key={tool.id}
-                  tool={tool}
-                  isFavorite={isFavorite(tool.id)}
-                  onToggleFavorite={toggleFavorite}
-                />
+                <motion.div key={tool.id} variants={cardItemVariants}>
+                  <ToolCard
+                    tool={tool}
+                    isFavorite={isFavorite(tool.id)}
+                    onToggleFavorite={toggleFavorite}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       )}
@@ -699,10 +754,10 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            initial="hidden"
+            initial={prefersReducedMotion ? 'visible' : 'hidden'}
             whileInView="visible"
-            viewport={viewportScrollConfig}
-            variants={staggerContainer}
+            viewport={{ once: true, amount: 0.12 }}
+            variants={gridStaggerContainer}
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
@@ -714,8 +769,8 @@ export default function Home() {
               return (
                 <motion.div
                   key={prop.title}
-                  variants={fadeInUp}
-                  whileHover={{ y: -4 }}
+                  variants={featureCardVariants}
+                  whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                   className="card"
                   style={{
