@@ -4,24 +4,868 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png?v=3" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Devora — Developer tools, all in one place. Fast, free utilities for formatting, encoding, debugging, converting, generating, and working with data." />
+    <title>Devora — Developer Tools, All in One Place</title>
+    <meta name="description" content="Devora — 54 fast, free developer utilities for formatting, encoding, debugging, converting, generating, and working with data entirely in your browser." />
     <meta name="theme-color" content="#0f172a" />
+    <link rel="canonical" href="https://devora-toolkit.vercel.app/" />
+
+    <!-- Open Graph / Social Metadata -->
     <meta property="og:title" content="Devora — Developer Tools, All in One Place" />
-    <meta property="og:description" content="Fast, free utilities for formatting, encoding, debugging, converting, generating, and working with data." />
+    <meta property="og:description" content="54 fast, free developer utilities for formatting, encoding, debugging, converting, generating, and working with data." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://devora-toolkit.vercel.app/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Devora — Developer Tools, All in One Place" />
-    <meta name="twitter:description" content="Fast, free utilities for formatting, encoding, debugging, converting, generating, and working with data." />
+    <meta name="twitter:description" content="54 fast, free developer utilities for formatting, encoding, debugging, converting, generating, and working with data." />
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <title>Devora — Developer Tools, All in One Place</title>
+
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9459450161764401"
      crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="/assets/index-BYozAYF4.js"></script>
+
+    <!-- Structured Data (JSON-LD) for Search Engines & AI Crawlers -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Devora",
+      "url": "https://devora-toolkit.vercel.app/",
+      "description": "Fast, free, privacy-first developer utilities for formatting, encoding, debugging, converting, generating, and working with data entirely in your browser.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://devora-toolkit.vercel.app/tools?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "name": "Devora Developer Toolkit",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "100% Client-Side Processing",
+        "Zero Server Latency",
+        "Air-Gapped Privacy",
+        "54 Built-in Developer Tools",
+        "No Sign-up Required"
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "All Developer Tools",
+      "description": "Complete catalog of 54 developer tools available on Devora",
+      "numberOfItems": 54,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "JSON Formatter",
+          "description": "Format and beautify JSON data with proper indentation.",
+          "url": "https://devora-toolkit.vercel.app/tools/json-formatter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON Validator",
+          "description": "Validate JSON syntax and find errors instantly.",
+          "url": "https://devora-toolkit.vercel.app/tools/json-validator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JSON Minifier",
+          "description": "Minify JSON by removing whitespace and formatting.",
+          "url": "https://devora-toolkit.vercel.app/tools/json-minifier"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "JSON Viewer",
+          "description": "View and explore nested JSON data in a tree structure.",
+          "url": "https://devora-toolkit.vercel.app/tools/json-viewer"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "JSON to CSV",
+          "description": "Convert JSON arrays into CSV format for spreadsheets.",
+          "url": "https://devora-toolkit.vercel.app/tools/json-to-csv"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "CSV to JSON",
+          "description": "Convert CSV data into structured JSON format.",
+          "url": "https://devora-toolkit.vercel.app/tools/csv-to-json"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Base64 Encoder",
+          "description": "Encode text or data to Base64 format.",
+          "url": "https://devora-toolkit.vercel.app/tools/base64-encoder"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Base64 Decoder",
+          "description": "Decode Base64 encoded strings back to plain text.",
+          "url": "https://devora-toolkit.vercel.app/tools/base64-decoder"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "URL Encoder",
+          "description": "Encode special characters in URLs for safe transmission.",
+          "url": "https://devora-toolkit.vercel.app/tools/url-encoder"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "name": "URL Decoder",
+          "description": "Decode percent-encoded URLs back to readable text.",
+          "url": "https://devora-toolkit.vercel.app/tools/url-decoder"
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "name": "HTML Encoder",
+          "description": "Encode HTML entities to prevent XSS and display issues.",
+          "url": "https://devora-toolkit.vercel.app/tools/html-encoder"
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "name": "HTML Decoder",
+          "description": "Decode HTML entities back to their original characters.",
+          "url": "https://devora-toolkit.vercel.app/tools/html-decoder"
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "name": "UUID Generator",
+          "description": "Generate one or multiple random UUIDs (v4).",
+          "url": "https://devora-toolkit.vercel.app/tools/uuid-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "name": "Password Generator",
+          "description": "Generate strong, secure passwords with custom options.",
+          "url": "https://devora-toolkit.vercel.app/tools/password-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "name": "Random String Generator",
+          "description": "Generate random strings with configurable length and characters.",
+          "url": "https://devora-toolkit.vercel.app/tools/random-string-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "name": "Lorem Ipsum Generator",
+          "description": "Generate placeholder text in paragraphs, words, or sentences.",
+          "url": "https://devora-toolkit.vercel.app/tools/lorem-ipsum-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "name": "QR Code Generator",
+          "description": "Generate QR codes from text or URLs and download them.",
+          "url": "https://devora-toolkit.vercel.app/tools/qr-code-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "name": "JWT Decoder",
+          "description": "Decode JWT tokens and inspect header and payload.",
+          "url": "https://devora-toolkit.vercel.app/tools/jwt-decoder"
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "name": "HTTP Status Code Lookup",
+          "description": "Look up HTTP status codes with descriptions and usage.",
+          "url": "https://devora-toolkit.vercel.app/tools/http-status-codes"
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "name": "User-Agent Parser",
+          "description": "Parse user agent strings to identify browser and OS.",
+          "url": "https://devora-toolkit.vercel.app/tools/user-agent-parser"
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "name": "URL Parser",
+          "description": "Parse URLs into their components (protocol, host, path, query).",
+          "url": "https://devora-toolkit.vercel.app/tools/url-parser"
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "name": "Word & Character Counter",
+          "description": "Count words, characters, sentences, and paragraphs in real-time.",
+          "url": "https://devora-toolkit.vercel.app/tools/text-analyzer"
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "name": "Case Converter",
+          "description": "Convert text between uppercase, lowercase, camelCase, snake_case, and more.",
+          "url": "https://devora-toolkit.vercel.app/tools/case-converter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "name": "Text Diff Checker",
+          "description": "Compare two texts and highlight the differences.",
+          "url": "https://devora-toolkit.vercel.app/tools/text-diff"
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "name": "Remove Duplicate Lines",
+          "description": "Remove duplicate lines from text while preserving order.",
+          "url": "https://devora-toolkit.vercel.app/tools/remove-duplicate-lines"
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "name": "Sort Lines",
+          "description": "Sort text lines alphabetically, by length, or in reverse.",
+          "url": "https://devora-toolkit.vercel.app/tools/sort-lines"
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "name": "Whitespace Cleaner",
+          "description": "Remove unnecessary spaces, tabs, and empty lines from text.",
+          "url": "https://devora-toolkit.vercel.app/tools/whitespace-cleaner"
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "name": "Slug Generator",
+          "description": "Convert text into URL-friendly slugs.",
+          "url": "https://devora-toolkit.vercel.app/tools/slug-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "name": "HTML Formatter",
+          "description": "Format and beautify HTML code with proper indentation.",
+          "url": "https://devora-toolkit.vercel.app/tools/html-formatter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 30,
+          "name": "CSS Formatter",
+          "description": "Format and beautify CSS code.",
+          "url": "https://devora-toolkit.vercel.app/tools/css-formatter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 31,
+          "name": "JavaScript Formatter",
+          "description": "Format and beautify JavaScript code.",
+          "url": "https://devora-toolkit.vercel.app/tools/javascript-formatter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 32,
+          "name": "SQL Formatter",
+          "description": "Format and beautify SQL queries with proper indentation.",
+          "url": "https://devora-toolkit.vercel.app/tools/sql-formatter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 33,
+          "name": "XML Formatter",
+          "description": "Format and beautify XML data with proper indentation.",
+          "url": "https://devora-toolkit.vercel.app/tools/xml-formatter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 34,
+          "name": "Unix Timestamp Converter",
+          "description": "Convert between Unix timestamps and human-readable dates.",
+          "url": "https://devora-toolkit.vercel.app/tools/unix-timestamp-converter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 35,
+          "name": "Date/Time Converter",
+          "description": "Convert dates and times between different formats and timezones.",
+          "url": "https://devora-toolkit.vercel.app/tools/date-time-converter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 36,
+          "name": "Cron Expression Generator",
+          "description": "Build and understand cron expressions with an intuitive UI.",
+          "url": "https://devora-toolkit.vercel.app/tools/cron-expression-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 37,
+          "name": "MD5 Hash Generator",
+          "description": "Generate MD5 hashes from text input.",
+          "url": "https://devora-toolkit.vercel.app/tools/md5-hash-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 38,
+          "name": "SHA Hash Generator",
+          "description": "Generate SHA-1, SHA-256, and SHA-512 hashes.",
+          "url": "https://devora-toolkit.vercel.app/tools/sha-hash-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 39,
+          "name": "HMAC Generator",
+          "description": "Generate HMAC signatures using various hash algorithms.",
+          "url": "https://devora-toolkit.vercel.app/tools/hmac-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 40,
+          "name": "HEX/RGB/HSL Converter",
+          "description": "Convert colors between HEX, RGB, and HSL formats.",
+          "url": "https://devora-toolkit.vercel.app/tools/color-converter"
+        },
+        {
+          "@type": "ListItem",
+          "position": 41,
+          "name": "Color Picker",
+          "description": "Pick colors and get their values in multiple formats.",
+          "url": "https://devora-toolkit.vercel.app/tools/color-picker"
+        },
+        {
+          "@type": "ListItem",
+          "position": 42,
+          "name": "Contrast Checker",
+          "description": "Check color contrast ratio and WCAG accessibility compliance.",
+          "url": "https://devora-toolkit.vercel.app/tools/contrast-checker"
+        },
+        {
+          "@type": "ListItem",
+          "position": 43,
+          "name": "Regex Tester",
+          "description": "Test regular expressions with real-time matching and highlighting.",
+          "url": "https://devora-toolkit.vercel.app/tools/regex-tester"
+        },
+        {
+          "@type": "ListItem",
+          "position": 44,
+          "name": "Regex Generator",
+          "description": "Generate regular expressions with guided helpers and examples.",
+          "url": "https://devora-toolkit.vercel.app/tools/regex-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 45,
+          "name": "YAML to JSON",
+          "description": "Convert between YAML and JSON formats bidirectionally.",
+          "url": "https://devora-toolkit.vercel.app/tools/yaml-to-json"
+        },
+        {
+          "@type": "ListItem",
+          "position": 46,
+          "name": "Mock Data Generator",
+          "description": "Generate JSON arrays of dummy data for testing.",
+          "url": "https://devora-toolkit.vercel.app/tools/mock-data-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 47,
+          "name": "JSON Schema Validator",
+          "description": "Validate JSON data against a JSON Schema.",
+          "url": "https://devora-toolkit.vercel.app/tools/json-schema-validator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 48,
+          "name": "CSV Viewer",
+          "description": "View CSV data in a clean, interactive HTML table.",
+          "url": "https://devora-toolkit.vercel.app/tools/csv-viewer"
+        },
+        {
+          "@type": "ListItem",
+          "position": 49,
+          "name": "JSONPath Tester",
+          "description": "Test JSONPath expressions against JSON data.",
+          "url": "https://devora-toolkit.vercel.app/tools/json-path-tester"
+        },
+        {
+          "@type": "ListItem",
+          "position": 50,
+          "name": "Subnet Calculator",
+          "description": "Calculate IP ranges, CIDR blocks, and subnet masks.",
+          "url": "https://devora-toolkit.vercel.app/tools/subnet-calculator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 51,
+          "name": "MAC Address Generator",
+          "description": "Generate random MAC addresses with configurable formats.",
+          "url": "https://devora-toolkit.vercel.app/tools/mac-address-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 52,
+          "name": "Chmod Calculator",
+          "description": "Visual Unix permissions calculator with octal and symbolic outputs.",
+          "url": "https://devora-toolkit.vercel.app/tools/chmod-calculator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 53,
+          "name": "Bcrypt Generator",
+          "description": "Hash and verify passwords using Bcrypt.",
+          "url": "https://devora-toolkit.vercel.app/tools/bcrypt-generator"
+        },
+        {
+          "@type": "ListItem",
+          "position": 54,
+          "name": "SQL to JSON",
+          "description": "Parse SQL INSERT statements and convert them into structured JSON.",
+          "url": "https://devora-toolkit.vercel.app/tools/sql-to-json"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <script type="module" crossorigin src="/assets/index-Cmt7pgFI.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-M3WfbksD.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Semantic Static Fallback for Search Crawlers, AI Scrapers, & No-JS Clients -->
+      <header>
+        <nav aria-label="Main Navigation">
+          <a href="/">Devora</a>
+          <ul>
+            <li><a href="/tools">All Tools (54)</a></li>
+            <li><a href="/categories">Categories</a></li>
+            <li><a href="/popular">Popular Tools</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section aria-labelledby="hero-title">
+          <p><strong>100% Client-Side &amp; Private • 54 Tools Available</strong></p>
+          <h1 id="hero-title">Developer tools, all in one place.</h1>
+          <p>Fast, privacy-first developer utilities for formatting, encoding, debugging, converting, generating, and inspecting data in real time.</p>
+          <div>
+            <a href="/tools">Explore All 54 Tools</a>
+            <a href="/popular">Popular Tools</a>
+          </div>
+          <div>
+            <h3>Sub-Millisecond Speed</h3>
+            <p>0ms server latency, instant in-memory processing.</p>
+            <h3>Air-Gapped Privacy</h3>
+            <p>Zero network logs. Data never leaves your browser.</p>
+            <h3>54 Modern Utilities</h3>
+            <p>Format, encode, debug, generate, and inspect code and data.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="explore-title">
+          <h2 id="explore-title">Explore Utilities (54 Tools Available)</h2>
+          <p>High-performance utilities built for daily developer workflows.</p>
+          <div class="tools-directory">
+            <article>
+              <h3><a href="/tools/json-formatter">JSON Formatter</a></h3>
+              <p>Format and beautify JSON data with proper indentation.</p>
+              <span>Category: json</span>
+            </article>
+            <article>
+              <h3><a href="/tools/json-validator">JSON Validator</a></h3>
+              <p>Validate JSON syntax and find errors instantly.</p>
+              <span>Category: json</span>
+            </article>
+            <article>
+              <h3><a href="/tools/json-minifier">JSON Minifier</a></h3>
+              <p>Minify JSON by removing whitespace and formatting.</p>
+              <span>Category: json</span>
+            </article>
+            <article>
+              <h3><a href="/tools/json-viewer">JSON Viewer</a></h3>
+              <p>View and explore nested JSON data in a tree structure.</p>
+              <span>Category: json</span>
+            </article>
+            <article>
+              <h3><a href="/tools/json-to-csv">JSON to CSV</a></h3>
+              <p>Convert JSON arrays into CSV format for spreadsheets.</p>
+              <span>Category: converters</span>
+            </article>
+            <article>
+              <h3><a href="/tools/csv-to-json">CSV to JSON</a></h3>
+              <p>Convert CSV data into structured JSON format.</p>
+              <span>Category: converters</span>
+            </article>
+            <article>
+              <h3><a href="/tools/base64-encoder">Base64 Encoder</a></h3>
+              <p>Encode text or data to Base64 format.</p>
+              <span>Category: encoding</span>
+            </article>
+            <article>
+              <h3><a href="/tools/base64-decoder">Base64 Decoder</a></h3>
+              <p>Decode Base64 encoded strings back to plain text.</p>
+              <span>Category: encoding</span>
+            </article>
+            <article>
+              <h3><a href="/tools/url-encoder">URL Encoder</a></h3>
+              <p>Encode special characters in URLs for safe transmission.</p>
+              <span>Category: encoding</span>
+            </article>
+            <article>
+              <h3><a href="/tools/url-decoder">URL Decoder</a></h3>
+              <p>Decode percent-encoded URLs back to readable text.</p>
+              <span>Category: encoding</span>
+            </article>
+            <article>
+              <h3><a href="/tools/html-encoder">HTML Encoder</a></h3>
+              <p>Encode HTML entities to prevent XSS and display issues.</p>
+              <span>Category: encoding</span>
+            </article>
+            <article>
+              <h3><a href="/tools/html-decoder">HTML Decoder</a></h3>
+              <p>Decode HTML entities back to their original characters.</p>
+              <span>Category: encoding</span>
+            </article>
+            <article>
+              <h3><a href="/tools/uuid-generator">UUID Generator</a></h3>
+              <p>Generate one or multiple random UUIDs (v4).</p>
+              <span>Category: generators</span>
+            </article>
+            <article>
+              <h3><a href="/tools/password-generator">Password Generator</a></h3>
+              <p>Generate strong, secure passwords with custom options.</p>
+              <span>Category: generators</span>
+            </article>
+            <article>
+              <h3><a href="/tools/random-string-generator">Random String Generator</a></h3>
+              <p>Generate random strings with configurable length and characters.</p>
+              <span>Category: generators</span>
+            </article>
+            <article>
+              <h3><a href="/tools/lorem-ipsum-generator">Lorem Ipsum Generator</a></h3>
+              <p>Generate placeholder text in paragraphs, words, or sentences.</p>
+              <span>Category: generators</span>
+            </article>
+            <article>
+              <h3><a href="/tools/qr-code-generator">QR Code Generator</a></h3>
+              <p>Generate QR codes from text or URLs and download them.</p>
+              <span>Category: generators</span>
+            </article>
+            <article>
+              <h3><a href="/tools/jwt-decoder">JWT Decoder</a></h3>
+              <p>Decode JWT tokens and inspect header and payload.</p>
+              <span>Category: web</span>
+            </article>
+            <article>
+              <h3><a href="/tools/http-status-codes">HTTP Status Code Lookup</a></h3>
+              <p>Look up HTTP status codes with descriptions and usage.</p>
+              <span>Category: web</span>
+            </article>
+            <article>
+              <h3><a href="/tools/user-agent-parser">User-Agent Parser</a></h3>
+              <p>Parse user agent strings to identify browser and OS.</p>
+              <span>Category: web</span>
+            </article>
+            <article>
+              <h3><a href="/tools/url-parser">URL Parser</a></h3>
+              <p>Parse URLs into their components (protocol, host, path, query).</p>
+              <span>Category: web</span>
+            </article>
+            <article>
+              <h3><a href="/tools/text-analyzer">Word & Character Counter</a></h3>
+              <p>Count words, characters, sentences, and paragraphs in real-time.</p>
+              <span>Category: text</span>
+            </article>
+            <article>
+              <h3><a href="/tools/case-converter">Case Converter</a></h3>
+              <p>Convert text between uppercase, lowercase, camelCase, snake_case, and more.</p>
+              <span>Category: text</span>
+            </article>
+            <article>
+              <h3><a href="/tools/text-diff">Text Diff Checker</a></h3>
+              <p>Compare two texts and highlight the differences.</p>
+              <span>Category: text</span>
+            </article>
+            <article>
+              <h3><a href="/tools/remove-duplicate-lines">Remove Duplicate Lines</a></h3>
+              <p>Remove duplicate lines from text while preserving order.</p>
+              <span>Category: text</span>
+            </article>
+            <article>
+              <h3><a href="/tools/sort-lines">Sort Lines</a></h3>
+              <p>Sort text lines alphabetically, by length, or in reverse.</p>
+              <span>Category: text</span>
+            </article>
+            <article>
+              <h3><a href="/tools/whitespace-cleaner">Whitespace Cleaner</a></h3>
+              <p>Remove unnecessary spaces, tabs, and empty lines from text.</p>
+              <span>Category: text</span>
+            </article>
+            <article>
+              <h3><a href="/tools/slug-generator">Slug Generator</a></h3>
+              <p>Convert text into URL-friendly slugs.</p>
+              <span>Category: text</span>
+            </article>
+            <article>
+              <h3><a href="/tools/html-formatter">HTML Formatter</a></h3>
+              <p>Format and beautify HTML code with proper indentation.</p>
+              <span>Category: formatters</span>
+            </article>
+            <article>
+              <h3><a href="/tools/css-formatter">CSS Formatter</a></h3>
+              <p>Format and beautify CSS code.</p>
+              <span>Category: formatters</span>
+            </article>
+            <article>
+              <h3><a href="/tools/javascript-formatter">JavaScript Formatter</a></h3>
+              <p>Format and beautify JavaScript code.</p>
+              <span>Category: formatters</span>
+            </article>
+            <article>
+              <h3><a href="/tools/sql-formatter">SQL Formatter</a></h3>
+              <p>Format and beautify SQL queries with proper indentation.</p>
+              <span>Category: sql</span>
+            </article>
+            <article>
+              <h3><a href="/tools/xml-formatter">XML Formatter</a></h3>
+              <p>Format and beautify XML data with proper indentation.</p>
+              <span>Category: formatters</span>
+            </article>
+            <article>
+              <h3><a href="/tools/unix-timestamp-converter">Unix Timestamp Converter</a></h3>
+              <p>Convert between Unix timestamps and human-readable dates.</p>
+              <span>Category: date-time</span>
+            </article>
+            <article>
+              <h3><a href="/tools/date-time-converter">Date/Time Converter</a></h3>
+              <p>Convert dates and times between different formats and timezones.</p>
+              <span>Category: date-time</span>
+            </article>
+            <article>
+              <h3><a href="/tools/cron-expression-generator">Cron Expression Generator</a></h3>
+              <p>Build and understand cron expressions with an intuitive UI.</p>
+              <span>Category: date-time</span>
+            </article>
+            <article>
+              <h3><a href="/tools/md5-hash-generator">MD5 Hash Generator</a></h3>
+              <p>Generate MD5 hashes from text input.</p>
+              <span>Category: security</span>
+            </article>
+            <article>
+              <h3><a href="/tools/sha-hash-generator">SHA Hash Generator</a></h3>
+              <p>Generate SHA-1, SHA-256, and SHA-512 hashes.</p>
+              <span>Category: security</span>
+            </article>
+            <article>
+              <h3><a href="/tools/hmac-generator">HMAC Generator</a></h3>
+              <p>Generate HMAC signatures using various hash algorithms.</p>
+              <span>Category: security</span>
+            </article>
+            <article>
+              <h3><a href="/tools/color-converter">HEX/RGB/HSL Converter</a></h3>
+              <p>Convert colors between HEX, RGB, and HSL formats.</p>
+              <span>Category: colors</span>
+            </article>
+            <article>
+              <h3><a href="/tools/color-picker">Color Picker</a></h3>
+              <p>Pick colors and get their values in multiple formats.</p>
+              <span>Category: colors</span>
+            </article>
+            <article>
+              <h3><a href="/tools/contrast-checker">Contrast Checker</a></h3>
+              <p>Check color contrast ratio and WCAG accessibility compliance.</p>
+              <span>Category: colors</span>
+            </article>
+            <article>
+              <h3><a href="/tools/regex-tester">Regex Tester</a></h3>
+              <p>Test regular expressions with real-time matching and highlighting.</p>
+              <span>Category: regex</span>
+            </article>
+            <article>
+              <h3><a href="/tools/regex-generator">Regex Generator</a></h3>
+              <p>Generate regular expressions with guided helpers and examples.</p>
+              <span>Category: regex</span>
+            </article>
+            <article>
+              <h3><a href="/tools/yaml-to-json">YAML to JSON</a></h3>
+              <p>Convert between YAML and JSON formats bidirectionally.</p>
+              <span>Category: converters</span>
+            </article>
+            <article>
+              <h3><a href="/tools/mock-data-generator">Mock Data Generator</a></h3>
+              <p>Generate JSON arrays of dummy data for testing.</p>
+              <span>Category: testing</span>
+            </article>
+            <article>
+              <h3><a href="/tools/json-schema-validator">JSON Schema Validator</a></h3>
+              <p>Validate JSON data against a JSON Schema.</p>
+              <span>Category: testing</span>
+            </article>
+            <article>
+              <h3><a href="/tools/csv-viewer">CSV Viewer</a></h3>
+              <p>View CSV data in a clean, interactive HTML table.</p>
+              <span>Category: data</span>
+            </article>
+            <article>
+              <h3><a href="/tools/json-path-tester">JSONPath Tester</a></h3>
+              <p>Test JSONPath expressions against JSON data.</p>
+              <span>Category: data</span>
+            </article>
+            <article>
+              <h3><a href="/tools/subnet-calculator">Subnet Calculator</a></h3>
+              <p>Calculate IP ranges, CIDR blocks, and subnet masks.</p>
+              <span>Category: networking</span>
+            </article>
+            <article>
+              <h3><a href="/tools/mac-address-generator">MAC Address Generator</a></h3>
+              <p>Generate random MAC addresses with configurable formats.</p>
+              <span>Category: networking</span>
+            </article>
+            <article>
+              <h3><a href="/tools/chmod-calculator">Chmod Calculator</a></h3>
+              <p>Visual Unix permissions calculator with octal and symbolic outputs.</p>
+              <span>Category: developer</span>
+            </article>
+            <article>
+              <h3><a href="/tools/bcrypt-generator">Bcrypt Generator</a></h3>
+              <p>Hash and verify passwords using Bcrypt.</p>
+              <span>Category: developer</span>
+            </article>
+            <article>
+              <h3><a href="/tools/sql-to-json">SQL to JSON</a></h3>
+              <p>Parse SQL INSERT statements and convert them into structured JSON.</p>
+              <span>Category: sql</span>
+            </article>
+          </div>
+        </section>
+
+        <section aria-labelledby="categories-title">
+          <h2 id="categories-title">Browse by Category (16 Categories)</h2>
+          <div class="categories-directory">
+            <article>
+              <h3><a href="/categories/json">JSON Tools</a></h3>
+              <p>Format, validate, minify, view, and convert JSON data.</p>
+              <p>Contains 4 tools: <a href="/tools/json-formatter">JSON Formatter</a>, <a href="/tools/json-validator">JSON Validator</a>, <a href="/tools/json-minifier">JSON Minifier</a>, <a href="/tools/json-viewer">JSON Viewer</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/encoding">Encoding & Decoding</a></h3>
+              <p>Encode and decode Base64, URLs, HTML entities, and more.</p>
+              <p>Contains 6 tools: <a href="/tools/base64-encoder">Base64 Encoder</a>, <a href="/tools/base64-decoder">Base64 Decoder</a>, <a href="/tools/url-encoder">URL Encoder</a>, <a href="/tools/url-decoder">URL Decoder</a>, <a href="/tools/html-encoder">HTML Encoder</a>, <a href="/tools/html-decoder">HTML Decoder</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/generators">Generators</a></h3>
+              <p>Generate UUIDs, passwords, random strings, lorem ipsum, and QR codes.</p>
+              <p>Contains 5 tools: <a href="/tools/uuid-generator">UUID Generator</a>, <a href="/tools/password-generator">Password Generator</a>, <a href="/tools/random-string-generator">Random String Generator</a>, <a href="/tools/lorem-ipsum-generator">Lorem Ipsum Generator</a>, <a href="/tools/qr-code-generator">QR Code Generator</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/text">Text Tools</a></h3>
+              <p>Count words, convert cases, diff text, remove duplicates, and clean whitespace.</p>
+              <p>Contains 7 tools: <a href="/tools/text-analyzer">Word & Character Counter</a>, <a href="/tools/case-converter">Case Converter</a>, <a href="/tools/text-diff">Text Diff Checker</a>, <a href="/tools/remove-duplicate-lines">Remove Duplicate Lines</a>, <a href="/tools/sort-lines">Sort Lines</a>, <a href="/tools/whitespace-cleaner">Whitespace Cleaner</a>, <a href="/tools/slug-generator">Slug Generator</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/formatters">Formatters</a></h3>
+              <p>Format and beautify HTML, CSS, JavaScript, SQL, and XML.</p>
+              <p>Contains 4 tools: <a href="/tools/html-formatter">HTML Formatter</a>, <a href="/tools/css-formatter">CSS Formatter</a>, <a href="/tools/javascript-formatter">JavaScript Formatter</a>, <a href="/tools/xml-formatter">XML Formatter</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/converters">Converters</a></h3>
+              <p>Convert between JSON, CSV, XML, YAML, and other data formats.</p>
+              <p>Contains 3 tools: <a href="/tools/json-to-csv">JSON to CSV</a>, <a href="/tools/csv-to-json">CSV to JSON</a>, <a href="/tools/yaml-to-json">YAML to JSON</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/web">Web Tools</a></h3>
+              <p>Decode JWTs, look up HTTP status codes, parse URLs and user agents.</p>
+              <p>Contains 4 tools: <a href="/tools/jwt-decoder">JWT Decoder</a>, <a href="/tools/http-status-codes">HTTP Status Code Lookup</a>, <a href="/tools/user-agent-parser">User-Agent Parser</a>, <a href="/tools/url-parser">URL Parser</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/security">Security & Hashing</a></h3>
+              <p>Generate MD5, SHA, and HMAC hashes for data integrity verification.</p>
+              <p>Contains 3 tools: <a href="/tools/md5-hash-generator">MD5 Hash Generator</a>, <a href="/tools/sha-hash-generator">SHA Hash Generator</a>, <a href="/tools/hmac-generator">HMAC Generator</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/regex">Regex Tools</a></h3>
+              <p>Test and build regular expressions with real-time matching.</p>
+              <p>Contains 2 tools: <a href="/tools/regex-tester">Regex Tester</a>, <a href="/tools/regex-generator">Regex Generator</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/date-time">Date & Time</a></h3>
+              <p>Convert timestamps, dates, timezones, and generate cron expressions.</p>
+              <p>Contains 3 tools: <a href="/tools/unix-timestamp-converter">Unix Timestamp Converter</a>, <a href="/tools/date-time-converter">Date/Time Converter</a>, <a href="/tools/cron-expression-generator">Cron Expression Generator</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/colors">Color Tools</a></h3>
+              <p>Convert HEX/RGB/HSL, pick colors, and check contrast accessibility.</p>
+              <p>Contains 3 tools: <a href="/tools/color-converter">HEX/RGB/HSL Converter</a>, <a href="/tools/color-picker">Color Picker</a>, <a href="/tools/contrast-checker">Contrast Checker</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/sql">SQL Tools</a></h3>
+              <p>Format and beautify SQL queries.</p>
+              <p>Contains 2 tools: <a href="/tools/sql-formatter">SQL Formatter</a>, <a href="/tools/sql-to-json">SQL to JSON</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/developer">Developer Utilities</a></h3>
+              <p>Miscellaneous developer productivity tools.</p>
+              <p>Contains 2 tools: <a href="/tools/chmod-calculator">Chmod Calculator</a>, <a href="/tools/bcrypt-generator">Bcrypt Generator</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/networking">Networking Tools</a></h3>
+              <p>Network-related utilities for developers.</p>
+              <p>Contains 2 tools: <a href="/tools/subnet-calculator">Subnet Calculator</a>, <a href="/tools/mac-address-generator">MAC Address Generator</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/data">Data Tools</a></h3>
+              <p>Inspect, transform, and manipulate data.</p>
+              <p>Contains 2 tools: <a href="/tools/csv-viewer">CSV Viewer</a>, <a href="/tools/json-path-tester">JSONPath Tester</a></p>
+            </article>
+            <article>
+              <h3><a href="/categories/testing">Testing Tools</a></h3>
+              <p>Generate test data and mock responses.</p>
+              <p>Contains 2 tools: <a href="/tools/mock-data-generator">Mock Data Generator</a>, <a href="/tools/json-schema-validator">JSON Schema Validator</a></p>
+            </article>
+          </div>
+        </section>
+
+        <section aria-labelledby="why-title">
+          <h2 id="why-title">Why Developers Choose Devora</h2>
+          <ul>
+            <li><strong>Lightning Fast:</strong> All tools run instantaneously in your browser with zero server roundtrips.</li>
+            <li><strong>Privacy First:</strong> Your data never leaves your computer. No backend uploads, no logs, no trackers.</li>
+            <li><strong>100% Free &amp; Open:</strong> Every single utility is completely free to use without requiring an account.</li>
+            <li><strong>Responsive &amp; Modern:</strong> Engineered with precision for desktop, tablet, and mobile browsers.</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>&copy; 2026 Devora. Built for developers, by developers. Zero server latency &bull; Client-side sandbox.</p>
+        <p>Contact: <a href="mailto:craft3dcod3w3b@gmail.com">craft3dcod3w3b@gmail.com</a></p>
+      </footer>
+    </div>
   </body>
 </html>

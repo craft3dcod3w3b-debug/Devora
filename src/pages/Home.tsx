@@ -514,10 +514,8 @@ export default function Home() {
 
           {/* Tools Grid — 12 Tools */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={viewportScrollConfig}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -560,9 +558,8 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportScrollConfig}
+            initial="visible"
+            animate="visible"
             variants={staggerContainer}
             style={{
               display: 'grid',

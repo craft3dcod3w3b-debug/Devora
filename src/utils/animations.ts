@@ -62,5 +62,5 @@ export const scaleIn: Variants = {
 
 export const viewportScrollConfig = {
   once: true,
-  margin: '-40px',
+  margin: '0px',
 };
