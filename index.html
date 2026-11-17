@@ -450,10 +450,43 @@
   ]
 }
     </script>
+    <!-- Prevent Flash of Unstyled Content (FOUC) and set instant theme background -->
+    <style>
+      :root {
+        color-scheme: dark;
+        background-color: #07090e;
+      }
+      html, body {
+        background-color: #07090e;
+        margin: 0;
+        padding: 0;
+      }
+      html:not(.dark) {
+        color-scheme: light;
+        background-color: #ffffff;
+      }
+    </style>
+    <script>
+      (function() {
+        try {
+          var raw = localStorage.getItem('devora_theme');
+          var theme = raw ? JSON.parse(raw) : 'system';
+          var isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.style.backgroundColor = '#ffffff';
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
-    <div id="root">
-      <!-- Semantic Static Fallback for Search Crawlers, AI Scrapers, & No-JS Clients -->
+    <div id="root"></div>
+
+    <!-- Semantic Static Fallback for Search Crawlers, AI Scrapers, & No-JS Clients -->
+    <noscript>
       <header>
         <nav aria-label="Main Navigation">
           <a href="/">Devora</a>
@@ -864,7 +897,7 @@
         <p>&copy; 2026 Devora. Built for developers, by developers. Zero server latency &bull; Client-side sandbox.</p>
         <p>Contact: <a href="mailto:craft3dcod3w3b@gmail.com">craft3dcod3w3b@gmail.com</a></p>
       </footer>
-    </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
