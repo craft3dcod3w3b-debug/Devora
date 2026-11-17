@@ -93,14 +93,10 @@ export default function ToolCard({ tool, isFavorite = false, onToggleFavorite }:
           lineHeight: 1.3,
           position: 'relative',
           zIndex: 2,
+          pointerEvents: 'none',
         }}
       >
-        <Link
-          to={`/tools/${tool.slug}`}
-          style={{ textDecoration: 'none', color: 'inherit' }}
-        >
-          {tool.name}
-        </Link>
+        {tool.name}
       </h3>
 
       <p
