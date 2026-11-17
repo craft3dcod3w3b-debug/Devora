@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Zap, ShieldCheck, Sparkles, Globe, ChevronDown } from 'lucide-react';
 import SearchBar from '../components/ui/SearchBar';
 import ToolCard from '../components/ui/ToolCard';
@@ -63,13 +63,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const prefersReducedMotion = useReducedMotion();
-  const { scrollY, scrollYProgress } = useScroll();
-
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  const { scrollY } = useScroll();
 
   const heroParallaxY = useTransform(scrollY, [0, 600], [0, 80]);
   const scrollIndicatorOpacity = useTransform(scrollY, [0, 70], [1, 0]);
@@ -103,24 +97,6 @@ export default function Home() {
         jsonLd={jsonLd}
         type="website"
       />
-
-      {/* ───── TOP SCROLL PROGRESS BAR ───── */}
-      {!prefersReducedMotion && (
-        <motion.div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '2.5px',
-            background: 'linear-gradient(90deg, var(--color-primary), #ec4899)',
-            transformOrigin: '0%',
-            scaleX,
-            zIndex: 9999,
-            pointerEvents: 'none',
-          }}
-        />
-      )}
 
       {/* ───── HERO SECTION ───── */}
       <section
